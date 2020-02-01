@@ -1,0 +1,1 @@
+# digdag-operator-store_gke_cofig
