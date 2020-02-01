@@ -15,9 +15,6 @@ import io.digdag.spi.SecretProvider;
 import io.digdag.spi.SecretNotFoundException;
 import io.digdag.spi.TaskRequest;
 import io.digdag.spi.TaskResult;
-import io.digdag.standards.operator.PyOperatorFactory;
-import io.digdag.standards.operator.RbOperatorFactory;
-import io.digdag.standards.operator.ShOperatorFactory;
 import io.digdag.util.BaseOperator;
 
 import java.io.IOException;
@@ -65,8 +62,7 @@ public class StoreGkeConfigOperatorFactory implements OperatorFactory {
         @Override
         public TaskResult runTask() {
             Config commandRequestConfig = request.getConfig()
-                .getNestedOrGetEmpty("store_gke_config")
-                .getNestedOrGetEmpty("_command");
+                .get("_command", Config.class);
 
             String cluster = commandRequestConfig.get("cluster", String.class);
             String project_id = commandRequestConfig.get("project_id", String.class);
