@@ -1,0 +1,15 @@
+_export:
+  plugin:
+    repositories:
+      - file://${repos}
+      # - https://jitpack.io
+    dependencies:
+      - io.digdag.plugin:digdag-plugin-example:0.1.0
+
+# Authenticate using a service account associated with an instance
++test1:
+  _retry: 3
+  store_gke_config>:
+    cluster: test-cluster
+    project_id: test
+    zone: asia-east1-a
