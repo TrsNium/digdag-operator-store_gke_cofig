@@ -4,12 +4,29 @@ _export:
       - file://${repos}
       # - https://jitpack.io
     dependencies:
-      - io.digdag.plugin:digdag-plugin-example:0.1.0
+      - io.digdag.plugin:digdag-operator-store_gke_config:0.1.0
 
 # Authenticate using a service account associated with an instance
 +test1:
   _retry: 3
   store_gke_config>:
+    cluster: test-cluster
+    project_id: test
+    zone: asia-east1-a
+
+# Authenticate using service account credentials
++test3:
+  _retry: 3
+  store_gke_config>:
+    credential_json_path: /tmp/gcp.credential
+    cluster: test-cluster
+    project_id: test
+    zone: asia-east1-a
+
+# Obtain and authenticate the service account credential in the digdag secret by key
++test3:
+  store_gke_config>:
+    credential_json_from_secret_key: gcp.credential
     cluster: test-cluster
     project_id: test
     zone: asia-east1-a
